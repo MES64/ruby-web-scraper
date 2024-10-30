@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
-require 'nokogiri'
-
 # ProductScraper
 class ProductScraper
   attr_accessor :document
+
+  def scrape_product_title
+    document.css('h1.productView-title').text
+  end
 end
