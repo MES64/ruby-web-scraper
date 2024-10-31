@@ -18,4 +18,8 @@ class ProductScraper
   def scrape_images
     document.css('a.productView-thumbnail-link').map { |image| image.attribute('href').value }
   end
+
+  def scrape_price
+    document.at_xpath('//span[@data-product-price-with-tax]').text
+  end
 end
