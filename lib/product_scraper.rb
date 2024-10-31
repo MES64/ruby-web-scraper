@@ -1,8 +1,20 @@
 # frozen_string_literal: true
 
+require 'httparty'
+require 'nokogiri'
+
 # ProductScraper
 class ProductScraper
-  attr_accessor :document
+  attr_reader :url, :document
+
+  def initialize(url_string)
+    self.url = url_string
+  end
+
+  def url=(url_string)
+    @url = url_string
+    @document = Nokogiri::HTML(HTTParty.get(url_string).body)
+  end
 
   def scrape_product_title
     document.css('h1.productView-title').text
