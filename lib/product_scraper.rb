@@ -22,4 +22,12 @@ class ProductScraper
   def scrape_price
     document.at_xpath('//span[@data-product-price-with-tax]').text
   end
+
+  def scrape_stock_status
+    if document.css('div.bb-availability-container dd').text == 'Sorry this item is currently unavailable'
+      return 'Out of stock'
+    end
+
+    'In stock'
+  end
 end
