@@ -7,4 +7,11 @@ class ProductScraper
   def scrape_product_title
     document.css('h1.productView-title').text
   end
+
+  def scrape_description
+    description_elements = document.at_xpath('//div[@itemprop]')
+    description_elements.css('br').each { |br| br.replace("\n") }
+    description_elements.css('li').each { |li| li << "\n" }
+    description_elements.text.strip
+  end
 end
