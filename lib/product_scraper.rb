@@ -14,4 +14,8 @@ class ProductScraper
     description_elements.css('li').each { |li| li << "\n" }
     description_elements.text.strip
   end
+
+  def scrape_images
+    document.css('a.productView-thumbnail-link').map { |image| image.attribute('href').value }
+  end
 end
